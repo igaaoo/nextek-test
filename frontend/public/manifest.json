@@ -1,0 +1,18 @@
+{
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Template Next.js", 
+  "short_name": "Template Next.js",
+  "description": "Projeto template para aplicações Next.js",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
