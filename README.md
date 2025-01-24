@@ -10,13 +10,13 @@ Este projeto consiste em um sistema com backend utilizando **NestJS**, frontend 
 nextek-test/
 ├── backend/          # Código do backend (NestJS)
 ├── frontend/         # Código do frontend (Next.js)
-│   ├── Dockerfile    # Dockerfile para configurar o container do frontend
+│   ├── Dockerfile
 │   ├── .env.local    # Arquivo de variáveis de ambiente para o frontend
-├── database/         # Scripts relacionados ao banco de dados
+├── database/
 │   ├── init.sql      # Script para inicialização do banco
 ├── docker-compose.yml # Arquivo para subir todos os serviços
-├── README.md         # Documentação do projeto
-└── .gitignore        # Lista de arquivos ignorados pelo Git
+├── README.md
+└── .gitignore
 ```
 
 ---
@@ -27,8 +27,8 @@ Certifique-se de ter os seguintes softwares instalados em sua máquina:
 
 - **Docker** (v20.10 ou superior)
 - **Docker Compose** (v1.29 ou superior)
-- **Node.js** (v18 ou superior, apenas para desenvolvimento local)
-- **npm** (v8 ou superior, apenas para desenvolvimento local)
+- **Node.js** (v18 ou superior)
+- **npm** (v8 ou superior)
 
 ---
 
@@ -141,20 +141,3 @@ O script `database/init.sql` será executado automaticamente na primeira inicial
 Certifique-se de que o banco MySQL esteja rodando (via Docker ou localmente) e configurado corretamente.
 
 ---
-
-## Notas Importantes
-
-- **Segurança:** Certifique-se de alterar as senhas padrão em um ambiente de produção.
-- **Logs:** Os logs do Docker podem ser acessados usando:
-
-  ```bash
-  docker-compose logs -f
-  ```
-
-- **Volumes:** O volume `mysql_data` é utilizado para persistir os dados do banco de dados.
-
----
-
-## Contato
-
-Se tiver dúvidas ou problemas, entre em contato com o responsável pelo projeto ou abra uma issue no repositório.
