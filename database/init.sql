@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
-    status ENUM('pendente', 'em andamento', 'concluída') DEFAULT 'pendente',
+    status ENUM('pendente', 'em_andamento', 'concluida') DEFAULT 'pendente',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -31,5 +31,5 @@ INSERT INTO users (name, email, password) VALUES
 -- Inserir dados iniciais de tarefas
 INSERT INTO tasks (user_id, title, description, status) VALUES
 (1, 'Configurar Redis', 'Configurar o cache Redis para o projeto', 'pendente'),
-(1, 'Criar API de autenticação', 'Implementar autenticação com JWT', 'em andamento'),
-(1, 'Finalizar design do frontend', 'Ajustar componentes para layout responsivo e acessível', 'concluída');
+(1, 'Criar API de autenticação', 'Implementar autenticação com JWT', 'em_andamento'),
+(1, 'Finalizar design do frontend', 'Ajustar componentes para layout responsivo e acessível', 'concluida');
