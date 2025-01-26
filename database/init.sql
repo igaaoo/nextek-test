@@ -1,5 +1,7 @@
 -- Criar o banco de dados
-CREATE DATABASE IF NOT EXISTS task_manager;
+CREATE DATABASE IF NOT EXISTS task_manager
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_general_ci;
 
 -- Usar o banco de dados criado
 USE task_manager;
