@@ -22,11 +22,9 @@ export class TasksController {
   @UseInterceptors(CacheInterceptor)
   async getTasks(
     @Request() req,
-    @Query('page', ParseIntPipe) page: number = 1, // Padrão: página 1
-    @Query('limit', ParseIntPipe) limit: number = 10 // Padrão: 10 itens por página
   ) {
     const userId = req.user.sub;
-    return this.tasksService.getTasks(userId, page, limit);
+    return this.tasksService.getTasks(userId);
   }
 
   @Put(':id')

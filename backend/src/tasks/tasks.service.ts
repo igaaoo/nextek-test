@@ -25,34 +25,21 @@ export class TasksService {
     return task;
   }
 
-  async getTasks(user_id: number, page: number, limit: number): Promise<any> {
-    const cacheKey = `tasks:${user_id}:page:${page}:limit:${limit}`;
+  async getTasks(user_id: number): Promise<any> {
+    const cacheKey = `tasks:${user_id}`;
 
     const cachedTasks = await this.cacheManager.get(cacheKey);
     if (cachedTasks) {
       return cachedTasks;
     }
 
-    this.logger.log(`Fetching tasks for user_id: ${user_id} | Page: ${page} | Limit: ${limit}`);
-    const totalTasks = await this.prisma.tasks.count({
-      where: { user_id },
-    });
-
-    const totalPages = Math.ceil(totalTasks / limit);
-    const offset = (page - 1) * limit;
-
+    this.logger.log(`Fetching tasks for user_id: ${user_id}`);
     const tasks = await this.prisma.tasks.findMany({
       where: { user_id },
-      skip: offset,
-      take: limit,
     });
 
     const result = {
-      totalTasks,
-      totalPages,
-      currentPage: page,
-      tasksPerPage: limit,
-      tasks,
+      tasks
     };
 
     await this.cacheManager.set(cacheKey, result, 300);
