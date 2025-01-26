@@ -4,7 +4,6 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import { SiteHeader } from "@/components/site-header";
-import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import AuthContextProvider from "@/context/AuthContextProvider";
 import DataContextProvider from "@/context/DataContextProvider";
@@ -40,7 +39,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "bg-background min-h-screen font-sans antialiased",
           fontSans.variable
         )}
       >
@@ -56,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </DataContextProvider>
         </AuthContextProvider>
         <footer >
-          <p className="text-center"><small>&copy; Copyright {currentYear} - Your Name</small></p>
+          <p className="text-center"><small>&copy; Copyright {currentYear} - Igor Neves</small></p>
         </footer>
       </body>
     </html>

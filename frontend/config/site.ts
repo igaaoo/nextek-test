@@ -1,42 +1,24 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Template",
+  name: "Nextek Teste",
   description:
-    "Template for Nextjs Aplications",
+    "Teste para a empresa Nextek",
   mainNav: [
     {
-      title: "Home",
+      title: "Tarefas",
       href: "/",
       security: 'public',
-
+      type: 'button'
     },
     {
-      title: "Private Page",
-      href: "/privatePage",
-      security: 'private',
+      title: "Usuários",
+      href: "/users",
+      security: 'public',
+      type: 'button'
     },
-    {
-      title: "Configurations",
-      href: "/configuracoes",
-      security: 'private',
-      type: 'dropdown',
-      links: [
-        {
-          title: 'Config 1',
-          href: '/config1'
-        },
-        {
-          title: 'Config 2',
-          href: '/config2'
-        },
-      ]
-    },
-
-
   ],
   links: {
     home: "/",
-    // dashboard: "/dash",
   },
 };
