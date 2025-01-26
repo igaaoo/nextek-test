@@ -48,8 +48,7 @@ cd nextek-test
 No diretório `frontend/`, configure o arquivo `.env.local` com as variáveis necessárias para o projeto. Exemplo:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:4000
-NEXT_PUBLIC_APP_ENV=development
+BACKEND_URL=http://localhost:4000
 ```
 
 #### Backend (se necessário)
@@ -57,12 +56,16 @@ NEXT_PUBLIC_APP_ENV=development
 No diretório `backend/`, adicione um arquivo `.env` e configure-o com as variáveis do backend. Exemplo:
 
 ```env
-DATABASE_HOST=mysql
-DATABASE_PORT=3306
-DATABASE_USER=nextek
-DATABASE_PASSWORD=nex@Tek
-DATABASE_NAME=task_manager
+DB_HOST=mysql
+DB_PORT=3306
+DB_USER=nextek
+DB_PASSWORD=nex@Tek
+DB_NAME=task_manager
+JWT_SECRET=nexSecretek
+DATABASE_URL="mysql://nextek:nex@Tek@mysql:3306/task_manager"
 ```
+
+Variáveis de ambiente nunca devem ser enviadas para um repositório público (Este projeto é um teste de seleção e não há dados sensíveis)
 
 ### 3. Configuração do Banco de Dados
 
@@ -85,6 +88,7 @@ O script `database/init.sql` será executado automaticamente na primeira inicial
    Este comando irá:
 
    - Construir e executar o container do frontend na porta `3000`
+   - Construir e executar o container do backend na porta `4000`
    - Executar o banco de dados MySQL na porta `3306`
 
 2. **Verificar os Serviços**:
@@ -139,5 +143,3 @@ O script `database/init.sql` será executado automaticamente na primeira inicial
 #### Banco de Dados
 
 Certifique-se de que o banco MySQL esteja rodando (via Docker ou localmente) e configurado corretamente.
-
----
