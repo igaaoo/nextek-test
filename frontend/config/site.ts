@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Nextek Teste",
+  name: "Teste Nextek",
   description:
     "Teste para a empresa Nextek",
   mainNav: [

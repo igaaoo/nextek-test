@@ -30,6 +30,7 @@ import { DataTablePagination } from "../components/data-table-pagination";
 import { DataTableToolbar } from "../components/data-table-toolbar";
 import { cn } from "@/lib/utils";
 import { tasksHeaders } from "./columns";
+import { useDataContext } from "@/context/DataContext";
 
 interface DataTableProps<TData, TValue> {
   data: TData[];
@@ -45,6 +46,7 @@ export function TasksDataTable<TData, TValue>({
     []
   );
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
 
   const columns = tasksHeaders as ColumnDef<TData, TValue>[];
 

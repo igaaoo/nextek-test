@@ -10,6 +10,7 @@ import DataContextProvider from "@/context/DataContextProvider";
 
 
 import { Metadata } from "next";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: {
@@ -47,13 +48,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <DataContextProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="relative flex min-h-screen flex-col">
-
                 <SiteHeader />
                 <div className="flex w-full p-0 md:px-20 lg:px-20">{children}</div>
               </div>
             </ThemeProvider>
           </DataContextProvider>
         </AuthContextProvider>
+
+        <Toaster />
         <footer >
           <p className="text-center"><small>&copy; Copyright {currentYear} - Igor Neves</small></p>
         </footer>

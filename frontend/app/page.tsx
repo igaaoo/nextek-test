@@ -28,9 +28,6 @@ export default function IndexPage() {
           data={tasksData}
         />
       }
-      {
-        tasksData.length
-      }
     </section>
   );
 }

@@ -48,7 +48,7 @@ cd nextek-test
 No diretório `frontend/`, configure o arquivo `.env.local` com as variáveis necessárias para o projeto. Exemplo:
 
 ```env
-BACKEND_URL=http://localhost:4000
+BACKEND_URL=http://backend:4000
 ```
 
 #### Backend (se necessário)

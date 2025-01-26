@@ -4,8 +4,8 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Nextek Teste",
-  "short_name": "Nextek Teste",
+  "name": "Teste Nextek",
+  "short_name": "Teste Nextek",
   "description": "Teste para a empresa Nextek",
   "orientation": "any",
   "icons": [

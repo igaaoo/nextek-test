@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import { taskType } from "@/types/taskType";
 import { EditTaskDialog } from "@/components/dialog/task/EditTaskDialog";
+import { Calendar, Check, Loader, Loader2, MapPin } from "lucide-react";
 
 
 export const tasksHeaders: ColumnDef<taskType>[] = [
@@ -25,9 +26,12 @@ export const tasksHeaders: ColumnDef<taskType>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <span>{
-            new Date(row.getValue("created_at")).toLocaleDateString("pt-BR")
-          }</span>
+          <span className="flex items-center gap-2">
+            <Calendar size={20} />
+            {
+              new Date(row.getValue("created_at")).toLocaleDateString("pt-BR")
+            }
+          </span>
         </div>
       );
     },
@@ -80,7 +84,29 @@ export const tasksHeaders: ColumnDef<taskType>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <span>{row.getValue("status")}</span>
+          {
+            row.getValue("status") === "pendente" &&
+            <span className="flex items-center gap-2">
+              <span>Pendente</span>
+              <Loader2 size={20} />
+            </span>
+          }
+
+          {
+            row.getValue("status") === "em_andamento" &&
+            <span className="flex items-center gap-2">
+              <span>Em andamento</span>
+              <MapPin size={20} />
+            </span>
+          }
+
+          {
+            row.getValue("status") === "concluida" &&
+            <span className="flex items-center gap-2">
+              <span>Concluída</span>
+              <Check size={20} />
+            </span>
+          }
         </div>
       );
     },

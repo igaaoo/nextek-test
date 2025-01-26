@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Eraser } from "lucide-react";
 import { statusFilter } from "../filters";
+import { CreateTaskDialog } from "@/components/dialog/task/CreateTaskDialog";
 
 
 interface DataTableToolbarProps<TData> {
@@ -80,6 +81,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
 
+        <CreateTaskDialog />
       </div>
 
     </div>

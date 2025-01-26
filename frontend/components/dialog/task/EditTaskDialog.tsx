@@ -33,13 +33,18 @@ import { useAuthContext } from "@/context/AuthContext";
 import { SubmitButton } from "@/components/buttons/SubmitButton";
 import { useToast } from "@/hooks/use-toast";
 import { taskType } from "@/types/taskType";
+import { useDataContext } from "@/context/DataContext";
+
 
 export function EditTaskDialog({ id, title, description, status }: taskType) {
   const { token } = useAuthContext();
+  const { getTasksData } = useDataContext();
   const { toast } = useToast();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const [taskStatus, setTaskStatus] = useState(status);
 
   const { register, handleSubmit } = useForm({
     mode: 'onSubmit'
@@ -48,15 +53,26 @@ export function EditTaskDialog({ id, title, description, status }: taskType) {
   async function onSubmit(data: any) {
     setLoading(true);
     data.token = token;
-    // data.taskStatus = taskStatus;
+    data.id = id;
+    data.status = taskStatus;
 
-    axios.post('/api/task', data).then(response => (
-      console.log(response)
-    )).catch((err) => {
-      console.log(err);
-    }).finally(() => {
+    axios.put('/api/tasks', data).then(response => {
       setLoading(false);
-      // updateTasks();
+      toast({
+        title: 'Tarefa Editada',
+        description: 'As informações da tarefa foram atualizadas com sucesso!',
+      });
+    }
+    ).catch((err) => {
+      console.log(err);
+      setLoading(false);
+      toast({
+        title: 'Erro ao editar tarefa',
+        description: 'Ocorreu um erro ao editar a tarefa. Tente novamente mais tarde.',
+        variant: 'destructive'
+      });
+    }).finally(() => {
+      getTasksData();
     });
 
     setOpen(false);
@@ -65,13 +81,13 @@ export function EditTaskDialog({ id, title, description, status }: taskType) {
   async function deleteTask() {
     setLoading(true);
 
-    axios.delete('/api/task', {
+    axios.delete('/api/tasks', {
       headers: {
         token,
         id
       }
     }).then(() => {
-      // updateTasks();
+      getTasksData();
       toast({
         title: "Sucesso",
         description: `Tarefa de id: ${id} deletada`
@@ -109,19 +125,19 @@ export function EditTaskDialog({ id, title, description, status }: taskType) {
           <div className="  grid w-full grid-cols-1 items-center gap-6  ">
             <div className=" items-center gap-2">
               <Label className="font-medium text-gray-700" htmlFor="title" >Título</Label>
-              <Input type="text" id="title" {...register("title")} readOnly defaultValue={title} />
+              <Input type="text" id="title" {...register("title")} defaultValue={title} />
             </div>
 
             <div className=" items-center gap-2">
               <Label className=" font-medium text-gray-700" htmlFor="description" >Descrição</Label>
-              <Input type="text" id="description" {...register("description")} readOnly defaultValue={description} />
+              <Input type="text" id="description" {...register("description")} defaultValue={description} />
             </div>
 
             <div className=" items-center gap-2">
               <Label className=" font-medium text-gray-700" htmlFor="status" >Status</Label>
-              <Select {...register("status")} defaultValue={status}>
+              <Select {...register("status")} defaultValue={taskStatus} onValueChange={(value) => setTaskStatus(value)}>
                 <SelectTrigger>
-                  <SelectValue>{status}</SelectValue>
+                  <SelectValue>{taskStatus}</SelectValue>
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="pendente">Pendente</SelectItem>
