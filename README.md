@@ -95,6 +95,7 @@ O script `database/init.sql` será executado automaticamente na primeira inicial
 
    - Acesse o frontend em: [http://localhost:3000](http://localhost:3000)
    - O banco de dados estará disponível em: `localhost:3306`
+   - Faça login no Frontend com: Usuário - teste@nextek.com.br / Senha - nextek123
 
 3. **Encerrar os Serviços**:
 
