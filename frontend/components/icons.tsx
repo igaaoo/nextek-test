@@ -5,6 +5,8 @@ import {
   type icons as LucideIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Logo from "@/public/svg/logo.svg";
+
 
 export type Icon = typeof LucideIcon;
 
@@ -14,7 +16,7 @@ export const Icons = {
   logo: (props: LucideProps) => (
 
     <Image
-      src="/logo.png" alt="Logo" width={300} height={80} id="logo" priority
+      src={Logo} alt="Logo" width={300} height={80} id="logo" priority
     />
   ),
 };
