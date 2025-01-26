@@ -33,7 +33,7 @@ export function CreateTaskDialog() {
   const [loading, setLoading] = useState(false);
 
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: 'onSubmit'
   });
 
@@ -58,6 +58,7 @@ export function CreateTaskDialog() {
       });
     }).finally(() => {
       getTasksData();
+      reset();
     });
 
     setOpen(false);

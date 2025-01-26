@@ -128,7 +128,7 @@ export function TasksDataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  Buscando resultados...
+                  Nenhum resultado encontrado
                 </TableCell>
               </TableRow>
             )}

@@ -46,7 +46,7 @@ export function EditTaskDialog({ id, title, description, status }: taskType) {
 
   const [taskStatus, setTaskStatus] = useState(status);
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit, reset } = useForm({
     mode: 'onSubmit'
   });
 
@@ -73,6 +73,7 @@ export function EditTaskDialog({ id, title, description, status }: taskType) {
       });
     }).finally(() => {
       getTasksData();
+      reset();
     });
 
     setOpen(false);
