@@ -1,6 +1,8 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
+import { TasksService } from 'src/tasks/tasks.service';
+
 
 @Injectable()
 export class AuthService {
@@ -8,7 +10,8 @@ export class AuthService {
 
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private tasksService: TasksService
   ) { }
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -25,6 +28,7 @@ export class AuthService {
     const payload = { sub: user.id, email: user.email, role: 'user' };
 
     this.logger.log(`User ${user.email} logged in`);
+    this.tasksService.clearCache();
     return {
       access_token: this.jwtService.sign(payload),
     };

@@ -10,8 +10,13 @@ export class TasksService {
 
   constructor(
     private prisma: PrismaService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache
+    @Inject(CACHE_MANAGER) public cacheManager: Cache
   ) { }
+
+  public async clearCache() {
+    this.logger.log(`Clearing cache`);
+    await this.cacheManager.clear();
+  }
 
   async createTask(data: { title: string; description: string; user_id: number; }): Promise<Tasks> {
     this.logger.log(`Task created for user_id: ${data.user_id} | Title: "${data.title}"`);
@@ -20,7 +25,7 @@ export class TasksService {
     });
 
     this.logger.log(`Clearing cache after creating task for user_id: ${data.user_id}`);
-    await this.cacheManager.clear();;
+    await this.cacheManager.clear();
 
     return task;
   }
@@ -32,6 +37,7 @@ export class TasksService {
     if (cachedTasks) {
       return cachedTasks;
     }
+
 
     this.logger.log(`Fetching tasks for user_id: ${user_id}`);
     const tasks = await this.prisma.tasks.findMany({

@@ -8,6 +8,7 @@ import { CacheModule } from '@nestjs/cache-manager';
   controllers: [TasksController],
   imports: [
     CacheModule.register()
-  ]
+  ],
+  exports: [TasksService]
 })
 export class TasksModule { }
