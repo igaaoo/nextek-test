@@ -9,7 +9,7 @@ node_modules
 coverage
 
 # next.js
-.next/
+/frontend/.next/
 out/
 build
 
@@ -27,10 +27,8 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
 
 # turbo
 .turbo
-
+/backend/dist
 .contentlayer
-.env
