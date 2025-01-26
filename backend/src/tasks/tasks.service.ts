@@ -1,7 +1,7 @@
 import { Injectable, ForbiddenException, Logger, Inject } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Cache } from 'cache-manager';
-import { tasks } from '@prisma/client';
+import { Tasks } from '@prisma/client';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class TasksService {
     @Inject(CACHE_MANAGER) private cacheManager: Cache
   ) { }
 
-  async createTask(data: { title: string; description: string; user_id: number; }): Promise<tasks> {
+  async createTask(data: { title: string; description: string; user_id: number; }): Promise<Tasks> {
     this.logger.log(`Task created for user_id: ${data.user_id} | Title: "${data.title}"`);
     const task = await this.prisma.tasks.create({
       data,
@@ -60,7 +60,7 @@ export class TasksService {
     return result;
   }
 
-  async updateTask(id: number, data: Partial<tasks>, user_id: number): Promise<tasks> {
+  async updateTask(id: number, data: Partial<Tasks>, user_id: number): Promise<Tasks> {
     const task = await this.prisma.tasks.findUnique({
       where: { id },
     });
@@ -82,7 +82,7 @@ export class TasksService {
     return updatedTask;
   }
 
-  async deleteTask(id: number, user_id: number): Promise<tasks> {
+  async deleteTask(id: number, user_id: number): Promise<Tasks> {
     const task = await this.prisma.tasks.findUnique({
       where: { id },
     });

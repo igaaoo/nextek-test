@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Get, Put, Delete, Param, Query, UseGuards, Request, ParseIntPipe, UseInterceptors } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { tasks } from '@prisma/client';
+import { Tasks } from '@prisma/client';
 import { AuthGuard } from '../auth/auth.guard';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 
@@ -32,7 +32,7 @@ export class TasksController {
   @Put(':id')
   async updateTask(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: Partial<tasks>,
+    @Body() body: Partial<Tasks>,
     @Request() req
   ) {
     const userId = req.user.sub;
