@@ -2,7 +2,6 @@ import { createContext, useContext } from 'react';
 
 
 export interface AuthContextType {
-  // Tipos dos dados 
   user: string;
   token: string;
   role: string;

@@ -3,7 +3,6 @@ import { Dispatch, SetStateAction, createContext, useContext } from 'react';
 import { DataType } from '@/components/table/Columns';
 
 export interface DataContextType {
-  // Defina os tipos dos dados que você deseja compartilhar
   data: DataType[];
   setData: Dispatch<SetStateAction<DataType[]>>;
 }

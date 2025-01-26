@@ -27,7 +27,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
     const decodedToken = jwt.decode(token) as jwtType;
 
-    setUser(decodedToken.user);
+    setUser(decodedToken.email);
     setRole(decodedToken.role);
   };
 
@@ -50,16 +50,8 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     if (hasCookie(sessionName)) {
       login(getCookie(sessionName)!.toString());
       siteConfig.mainNav.map((item) => {
-        if (item.type !== 'dropdown') {
-          if (item.href == pathName) {
-            handlePrivateRoute(item);
-          }
-        } else {
-          item.links.map((subItem) => {
-            if (subItem.href == pathName) {
-              handlePrivateRoute(item);
-            }
-          });
+        if (item.href == pathName) {
+          handlePrivateRoute(item);
         }
       });
     } else {
@@ -67,6 +59,7 @@ const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         redirect('/login');
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [role]);
 
 
