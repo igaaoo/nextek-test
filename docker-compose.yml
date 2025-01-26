@@ -1,27 +1,8 @@
+networks:
+  app-network:
+    driver: bridge
+
 services:
-  frontend:
-    container_name: frontend
-    build:
-      context: ./frontend
-    ports:
-      - '3000:3000'
-    env_file:
-      - ./frontend/.env.local
-    depends_on:
-      # - backend
-      - mysql
-
-  # backend:
-  #   container_name: backend
-  #   build:
-  #     context: ./backend
-  #   ports:
-  #     - "4000:4000"
-  #   env_file:
-  #     - ./backend/.env
-  #   depends_on:
-  #     - mysql
-
   mysql:
     image: mysql:8.0
     container_name: mysql
@@ -36,6 +17,36 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./frontend/.env.local
+    depends_on:
+      - backend
+      - mysql
+    networks:
+      - app-network
+
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    ports:
+      - '4000:4000'
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    restart: always
 
 volumes:
   mysql_data:
