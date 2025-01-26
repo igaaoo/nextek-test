@@ -11,6 +11,7 @@ import {
   getFilteredRowModel,
 } from "@tanstack/react-table";
 
+
 import {
   Table,
   TableBody,
@@ -20,26 +21,29 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Input } from "../ui/input";
+
+import { Input } from "@/components/ui/input";
 import { Pagination } from "./Pagination";
 
-
+import { RefreshCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { EditUserDialog } from "@/components/dialog/user/EditUserDialog";
 
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-
+  updateUsers: any;
 }
 
-export function DataTable<TData, TValue>({
+export function UsersTable<TData, TValue>({
   columns,
   data,
+  updateUsers,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
-
 
   const table = useReactTable({
     data,
@@ -55,25 +59,21 @@ export function DataTable<TData, TValue>({
 
 
   return (
-    <div className="w-[85%] rounded-lg border-2 px-6 py-4 shadow-lg">
-      <div className="flex items-center justify-between ">
-        <div className="flex gap-2 py-4 ">
-
+    <div className="w-full rounded-lg border-2 px-6 py-4 shadow-lg">
+      <div className="flex w-full flex-wrap  items-center justify-between ">
+        <div className="flex items-center gap-2">
           <Input
-            placeholder="Filter"
+            placeholder="Filtrar"
             type="text"
-
+            className="my-2 w-full md:w-44 lg:w-44"
             onChange={(e) =>
               table.setGlobalFilter(e.target.value.toString())
             }
-
           />
-
+          <Button type="button" size="sm" variant="secondary" onClick={async () => await updateUsers()}><RefreshCcw className="rotate-180 hover:animate-spin" /></Button>
         </div>
-
         <Pagination table={table} />
       </div>
-
 
       <div className="rounded-md border">
         <Table>
@@ -101,11 +101,21 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="whitespace-nowrap"
                 >
                   {row.getVisibleCells().map((cell, index) => (
-                    <TableCell key={cell.id} className="p-3">
-
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <TableCell key={cell.id} className="p-2">
+                      {index === 2 ? (
+                        <EditUserDialog
+                          updateUsers={updateUsers}
+                          name={row.getValue('name')}
+                          email={row.getValue('email')}
+                          id={row.getValue('id')}
+                          created_at={row.getValue('created_at')}
+                        />
+                      ) : (
+                        flexRender(cell.column.columnDef.cell, cell.getContext())
+                      )}
 
                     </TableCell>
                   ))}
@@ -114,16 +124,14 @@ export function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results found.
+                  Buscando resultados...
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
-
       </div>
       <Pagination table={table} />
     </div>
-
   );
 }
