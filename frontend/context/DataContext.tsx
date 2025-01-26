@@ -1,10 +1,9 @@
-import { Dispatch, SetStateAction, createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
-import { DataType } from '@/components/table/Columns';
 
 export interface DataContextType {
-  data: DataType[];
-  setData: Dispatch<SetStateAction<DataType[]>>;
+  tasksData: any[];
+  getTasksData: () => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
